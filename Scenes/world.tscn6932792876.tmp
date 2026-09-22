@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://k7varkruhbch"]
+
+[ext_resource type="Script" uid="uid://cv1q6tg6rbs4x" path="res://Scripts/grid_manager.gd" id="1_go701"]
+[ext_resource type="Script" uid="uid://wlbqhfv5qkti" path="res://Scripts/area.gd" id="2_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://b5d7x5borc66l" path="res://Scenes/player.tscn" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bfbl2cdsiqru1" path="res://Scenes/enemy.tscn" id="3_8j60k"]
+[ext_resource type="PackedScene" uid="uid://c5g1n60kolmru" path="res://Scenes/supply.tscn" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://cecthkhrr0bjm" path="res://Scenes/ammo.tscn" id="6_5ukr8"]
+
+[node name="World" type="Node2D" unique_id=630070073]
+
+[node name="GridManager" type="Node2D" parent="." unique_id=318432254]
+script = ExtResource("1_go701")
+
+[node name="Areas" type="Node2D" parent="." unique_id=862840187]
+
+[node name="Area0" type="Node2D" parent="Areas" unique_id=1061379589]
+script = ExtResource("2_5a7ea")
+
+[node name="Area1" type="Node2D" parent="Areas" unique_id=767343150]
+script = ExtResource("2_5a7ea")
+
+[node name="Area2" type="Node2D" parent="Areas" unique_id=919800617]
+script = ExtResource("2_5a7ea")
+
+[node name="Area3" type="Node2D" parent="Areas" unique_id=1097476074]
+script = ExtResource("2_5a7ea")
+
+[node name="Area4" type="Node2D" parent="Areas" unique_id=276610957]
+script = ExtResource("2_5a7ea")
+
+[node name="Area5" type="Node2D" parent="Areas" unique_id=1952365562]
+script = ExtResource("2_5a7ea")
+
+[node name="Area6" type="Node2D" parent="Areas" unique_id=1245360647]
+script = ExtResource("2_5a7ea")
+
+[node name="Area7" type="Node2D" parent="Areas" unique_id=1964436840]
+script = ExtResource("2_5a7ea")
+
+[node name="Area8" type="Node2D" parent="Areas" unique_id=1405482748]
+script = ExtResource("2_5a7ea")
+
+[node name="Player" parent="." unique_id=953967477 instance=ExtResource("3_5a7ea")]
+position = Vector2(1200, 900)
+
+[node name="Enemies" type="Node2D" parent="." unique_id=603290025]
+
+[node name="Enemy" parent="Enemies" unique_id=968939248 node_paths=PackedStringArray("player") instance=ExtResource("3_8j60k")]
+position = Vector2(655, 622)
+player = NodePath("../../Player")
+
+[node name="Supplies" type="Node2D" parent="." unique_id=1212872096]
+
+[node name="Supply" parent="Supplies" unique_id=1617531199 instance=ExtResource("5_fo5ed")]
+position = Vector2(1132, 787)
+
+[node name="Ammos" type="Node2D" parent="." unique_id=1042999224]
+
+[node name="Ammo" parent="Ammos" unique_id=457910593 instance=ExtResource("6_5ukr8")]
+position = Vector2(1312, 891)

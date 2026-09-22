@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cecthkhrr0bjm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tt8i4"]
+size = Vector2(40, 40)
+
+[node name="Ammo" type="Node2D" unique_id=457910593]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1494737811]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 0.22745098, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1378175114 groups=["ammos"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1923142807]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_tt8i4")

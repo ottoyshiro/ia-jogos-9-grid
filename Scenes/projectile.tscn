@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://csxjs1fekmd2g"]
+
+[ext_resource type="Script" uid="uid://co83xgopbalgi" path="res://Scripts/projectile.gd" id="1_f8cdk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ukr8"]
+
+[node name="Projectile" type="Node2D" unique_id=1565990164]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2071620557]
+collision_mask = 2
+script = ExtResource("1_f8cdk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1996297855]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D" unique_id=484645890]
+position = Vector2(0.028656244, 4.7808976e-07)
+rotation = 1.5707964
+scale = Vector2(12, 15.329695)
+mesh = SubResource("BoxMesh_5ukr8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=351402892]
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="Area2D" method="_on_visible_on_screen_notifier_2d_screen_exited"]
