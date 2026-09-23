@@ -24,11 +24,9 @@ func get_neighbors(check_cell: Vector2i) -> Array[int]:
 	if check_cell == Vector2i(-1, -1):
 		return []
 
-	# 1. Primeiro, descobrimos em qual área (0 a 8) a célula enviada está
 	var player_cell_index = check_cell.y * GRID_SIZE + check_cell.x
 	var current_area = get_area_from_cell_index(player_cell_index)
 	
-	# 2. Convertemos o ID da área (0-8) para coordenadas X e Y numa grade 3x3
 	var area_x = current_area % 3
 	var area_y = current_area / 3
 
@@ -66,22 +64,21 @@ func update_player_cell() -> int:
 	if new_cell != current_cell:
 		current_cell = new_cell
 		
-		# 1. Pega o ID da área atual e a lista de vizinhos (0 a 8)
+		# Pega o ID da área atual e a lista de vizinhos (0 a 8)
 		var player_cell_index = current_cell.y * GRID_SIZE + current_cell.x
 		var current_area_id = get_area_from_cell_index(player_cell_index)
 		var neighbor_areas = get_neighbors(new_cell)
 		
-		# 2. Varre todas as 9 áreas do jogo
 		for i in range(9):
 			var area_node = get_node("../Areas/Area" + str(i))
 			
 			# Se for a área do player OU estiver na lista de vizinhos, ATIVA
 			if i == current_area_id or i in neighbor_areas:
-				area_node.process_mode = PROCESS_MODE_INHERIT # Roda normalmente
+				area_node.process_mode = PROCESS_MODE_INHERIT
 				area_node.visible = true # Opcional: mostra a área
 			else:
 				# Se estiver longe, DESATIVA tudo dentro dela (incluindo inimigos)
-				area_node.process_mode = PROCESS_MODE_DISABLED # Congela tudo
+				area_node.process_mode = PROCESS_MODE_DISABLED
 
 	return current_cell.y * GRID_SIZE + current_cell.x
 
@@ -89,27 +86,26 @@ func update_enemies_activity(current_area_id: int):
 	var neighbor_areas = get_neighbors(current_cell)
 	
 	# Garante que todas as áreas fiquem sempre ativas na hierarquia (PROCESS_MODE_INHERIT)
-	# para permitir que os inimigos se movam livremente entre elas sem bugar.
 	for i in range(9):
 		var area_node = get_node("../Areas/Area" + str(i))
 		area_node.process_mode = PROCESS_MODE_INHERIT
 
-	# Encontra todos os inimigos usando um grupo (Adicione o grupo "enemies" no nó do seu Inimigo)
+	# Encontra todos os inimigos usando um grupo
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	
 	for enemy in enemies:
 		if enemy is CharacterBody2D:
-			# 1. Calcula em qual célula 12x12 o INIMIGO está fisicamente agora
+			# Calcula em qual célula 12x12 o INIMIGO está fisicamente agora
 			var enemy_grid_x = floor(enemy.global_position.x / CELL_WIDTH)
 			var enemy_grid_y = floor(enemy.global_position.y / CELL_HEIGHT)
 			enemy_grid_x = clamp(enemy_grid_x, 0, GRID_SIZE - 1)
 			enemy_grid_y = clamp(enemy_grid_y, 0, GRID_SIZE - 1)
 			
 			var enemy_cell_index = enemy_grid_y * GRID_SIZE + enemy_grid_x
-			# 2. Transforma na área 0-8 do inimigo
+
 			var enemy_area = get_area_from_cell_index(enemy_cell_index)
 			
-			# 3. Se a área real do INIMIGO for a do player ou vizinha, ele se move!
+			# Se a área real do INIMIGO for a do player ou vizinha, ele se move
 			if enemy_area == current_area_id or enemy_area in neighbor_areas:
 				enemy.process_mode = PROCESS_MODE_INHERIT
 				enemy.visible = true
