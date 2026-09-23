@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="Pratica_01"
-run/main_scene="uid://k7varkruhbch"
+run/main_scene="uid://cbm50orcp1nit"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [global_group]
 
@@ -40,4 +39,5 @@ shoot={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

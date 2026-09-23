@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://csxjs1fekmd2g"]
 
 [ext_resource type="Script" uid="uid://co83xgopbalgi" path="res://Scripts/projectile.gd" id="1_f8cdk"]
+[ext_resource type="Texture2D" uid="uid://dtdtdv4icee0l" path="res://Assets/2D Health & Ammo Pickups v6.2/32px/ammo-pistol-alt 32px.png" id="2_yr2qt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_5ukr8"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
+radius = 4.0
+height = 20.0
 
 [node name="Projectile" type="Node2D" unique_id=1565990164]
 
@@ -13,13 +14,15 @@ collision_mask = 2
 script = ExtResource("1_f8cdk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1996297855]
-shape = SubResource("CircleShape2D_bhunq")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D" unique_id=484645890]
-position = Vector2(0.028656244, 4.7808976e-07)
 rotation = 1.5707964
-scale = Vector2(12, 15.329695)
-mesh = SubResource("BoxMesh_5ukr8")
+shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1326533196]
+position = Vector2(1, -5)
+rotation = 1.5707964
+scale = Vector2(1.6032865, 1.2362006)
+texture = ExtResource("2_yr2qt")
+hframes = 3
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=351402892]
 

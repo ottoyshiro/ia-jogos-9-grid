@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b0qvr8qs8lgr1"]
+
+[ext_resource type="Script" uid="uid://roepd04t1vuf" path="res://Scripts/player_ui.gd" id="1_ohrjl"]
+
+[node name="PlayerUI" type="CanvasLayer" unique_id=219347513]
+script = ExtResource("1_ohrjl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=58062775]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 7.0
+offset_bottom = 69.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=335978158]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=957846411]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "HEALTH: n / 10"
+
+[node name="AmmoLabel" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=2028011318]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "AMMO: n / 10"

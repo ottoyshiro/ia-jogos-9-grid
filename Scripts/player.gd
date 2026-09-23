@@ -20,6 +20,7 @@ var ammo: int = 20
 @onready var ray_cast_2d_3: RayCast2D = %RayCast2D3
 @onready var ray_casts_pivot: Node2D = %RayCastsPivot
 @onready var projectile_ref: Marker2D = %ProjectileRef
+@onready var player_ui: CanvasLayer = %PlayerUI
 
 @onready var ray_casts : Array[RayCast2D] = [ray_cast_2d, ray_cast_2d_2, ray_cast_2d_3]
 
@@ -98,11 +99,13 @@ func reload():
 	if ammo < MAX_AMMO:
 		ammo = 20
 		print('coletou municao')
+		player_ui.update()
 
 func heal():
 	if health < MAX_HEALTH:
 		health += 1
 		print('coletou suprimento')
+		player_ui.update()
 
 func shoot():
 	if ammo > 0:
@@ -121,13 +124,16 @@ func shoot():
 		# 4. Adiciona direto na raiz do mapa
 		get_tree().current_scene.add_child(projectile)
 		ammo -= 1
+		player_ui.update()
 	else:
 		print("sem municao")
 
 func take_damage(damage : int, enemy_position : Vector2):
 	if health <= 0:
 		print("morreu")
+		get_tree().quit()
 	health -= damage
+	player_ui.update()
 	print("tomou")
 	
 	var knockback_direction = (global_position - enemy_position).normalized()
